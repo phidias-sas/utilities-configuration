@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace Phidias\Utilities;
 
 class Configuration
@@ -8,9 +8,9 @@ class Configuration
 
     public static function set($variable, $value = null)
     {
-        $changes         = is_array($variable) ? $variable : array($variable => $value);
+        $changes         = is_array($variable) || is_object($variable) ? (array)$variable : [$variable => $value];
         self::$variables = array_merge(self::$variables, $changes);
-        
+
         self::triggerWatches($changes);
     }
 
